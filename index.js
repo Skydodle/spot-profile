@@ -35,6 +35,8 @@ const generateRandomString = (length) => {
 
 const stateKey = 'spotify_auth_state';
 
+//** REQUEST USER AUTHORIZATION */
+
 app.get('/login', (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -51,6 +53,9 @@ app.get('/login', (req, res) => {
 
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
+
+// Configure the redirect callback to post authorization and request access token
+// Then use access token to retrieve data from api
 
 app.get('/callback', (req, res) => {
   const code = req.query.code || null;
@@ -89,6 +94,30 @@ app.get('/callback', (req, res) => {
       } else {
         res.send(response);
       }
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+app.get('/refresh_token', (req, res) => {
+  const { refresh_token } = req.query;
+
+  axios({
+    method: 'post',
+    url: 'https://accounts.spotify.com/api.token',
+    data: querystring.stringify({
+      grant_type: 'refresh_token',
+      refresh_token: refresh_token,
+    }),
+    headers: {
+      Authorization: `Basic ${new Buffer.from(
+        `${CLIENT_ID}:${CLIENT_SECRET}`
+      ).toString('base64')}`,
+    },
+  })
+    .then((response) => {
+      res.send(response.data);
     })
     .catch((error) => {
       res.send(error);
