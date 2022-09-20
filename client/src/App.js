@@ -15,7 +15,7 @@ function App() {
       <header className="App-header">
         {!token ? (
           <a className="App-link" href="http://localhost:8888/login">
-            Log in to your Spotify account
+            Log in to Spotify
           </a>
         ) : (
           <h1>Logged In!</h1>
