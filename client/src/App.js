@@ -12,6 +12,7 @@ function App() {
     // console.log(accessToken);
     // console.log(refreshToken);
 
+    // Added proxy
     if (refreshToken) {
       fetch(`/refresh_token?refresh_token=${refreshToken}`)
         .then((res) => res.json())
