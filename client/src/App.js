@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { accessToken } from './spotify';
-import logo from './logo.svg';
+import { accessToken, logout } from './spotify';
 import './App.css';
 
 function App() {
@@ -13,12 +12,16 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        {/** Conditional render based on login state*/}
         {!token ? (
           <a className="App-link" href="http://localhost:8888/login">
             Log in to Spotify
           </a>
         ) : (
-          <h1>Logged In!</h1>
+          <>
+            <h1>Logged In!</h1>
+            <button onClick={logout}>Log Out</button>
+          </>
         )}
       </header>
     </div>
