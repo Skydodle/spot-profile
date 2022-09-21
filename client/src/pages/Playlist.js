@@ -1,29 +1,54 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { catchErrors } from '../utils';
 import { getPlaylistById } from '../spotify';
 import { StyledHeader } from '../styles';
 import { TrackList, SectionWrapper } from '../components';
+import axios from 'axios';
 
 const Playlist = () => {
   const { id } = useParams();
   const [playlist, setPlaylist] = useState(null);
   const [tracks, setTracks] = useState(null);
+  const [tracksData, setTracksData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getPlaylistById(id);
       setPlaylist(data);
-
-      const mapTracks = data.tracks.items.map(({ track }) => track);
-      setTracks(mapTracks);
-
-      // console.log(mapTracks);
+      setTracksData(data.tracks);
     };
     catchErrors(fetchData());
   }, [id]);
 
   // console.log(playlist);
+
+  useEffect(() => {
+    if (!tracksData) {
+      return;
+    }
+
+    // When tracksData updates, check if there are more tracks to fetch
+    // then update the state variable
+    const fetchMoreData = async () => {
+      if (tracksData.next) {
+        const { data } = await axios.get(tracksData.next);
+        setTracksData(data);
+      }
+    };
+
+    setTracks((tracks) => [...(tracks ? tracks : []), ...tracksData.items]);
+
+    catchErrors(fetchMoreData());
+  }, [tracksData]);
+
+  // Create a memoized array of tracks for the nested track
+  const tracksForTracklist = useMemo(() => {
+    if (!tracks) {
+      return;
+    }
+    return tracks.map(({ track }) => track);
+  }, [tracks]);
 
   return (
     <>
@@ -59,7 +84,9 @@ const Playlist = () => {
 
           <main>
             <SectionWrapper title="Playlist tracks" breadcrumb="true">
-              {playlist && tracks && <TrackList tracks={tracks} />}
+              {playlist && tracksForTracklist && (
+                <TrackList tracks={tracksForTracklist} />
+              )}
             </SectionWrapper>
           </main>
         </>
