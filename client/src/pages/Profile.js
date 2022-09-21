@@ -7,7 +7,12 @@ import {
   getTopTracks,
 } from '../spotify';
 import { StyledHeader } from '../styles';
-import { SectionWrapper, ArtistsGrid, TrackList } from '../components';
+import {
+  SectionWrapper,
+  ArtistsGrid,
+  TrackList,
+  PlaylistsGrid,
+} from '../components';
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -29,7 +34,7 @@ const Profile = () => {
       const userTopTracks = await getTopTracks();
       setTopTracks(userTopTracks.data);
 
-      // console.log(userPlaylists.data);
+      console.log(userPlaylists.data);
       // console.log(userTopArtists.data);
       // console.log(userTopTracks.data);
     };
@@ -83,6 +88,10 @@ const Profile = () => {
                 seeAllLink="/top-tracks"
               >
                 <TrackList tracks={topTracks.items.slice(0, 10)} />
+              </SectionWrapper>
+
+              <SectionWrapper title="Playlists" seeAllLink="/playlists">
+                <PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
               </SectionWrapper>
             </main>
           )}
