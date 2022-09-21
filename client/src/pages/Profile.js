@@ -34,7 +34,7 @@ const Profile = () => {
       const userTopTracks = await getTopTracks();
       setTopTracks(userTopTracks.data);
 
-      console.log(userPlaylists.data);
+      // console.log(userPlaylists.data);
       // console.log(userTopArtists.data);
       // console.log(userTopTracks.data);
     };

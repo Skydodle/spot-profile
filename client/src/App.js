@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
-import { Login, Profile, TopArtists } from './pages';
+import { Login, Profile, TopArtists, TopTracks } from './pages';
 import { GlobalStyle } from './styles';
 import styled from 'styled-components/macro';
 
@@ -74,7 +74,7 @@ function App() {
                   <TopArtists />
                 </Route>
                 <Route path="/top-tracks">
-                  <h1>Top Tracks</h1>
+                  <TopTracks />
                 </Route>
                 <Route path="/playlists/:id">
                   <h1>Playlist</h1>
