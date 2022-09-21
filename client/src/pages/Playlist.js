@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { catchErrors } from '../utils';
 import { getPlaylistById } from '../spotify';
 import { StyledHeader } from '../styles';
-import { TrackList, SectionWrapper } from '../components';
+import { TrackList, SectionWrapper, Loader } from '../components';
 import axios from 'axios';
 
 const Playlist = () => {
@@ -84,8 +84,10 @@ const Playlist = () => {
 
           <main>
             <SectionWrapper title="Playlist tracks" breadcrumb="true">
-              {playlist && tracksForTracklist && (
+              {playlist && tracksForTracklist ? (
                 <TrackList tracks={tracksForTracklist} />
+              ) : (
+                <Loader />
               )}
             </SectionWrapper>
           </main>
