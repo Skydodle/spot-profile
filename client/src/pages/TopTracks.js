@@ -26,7 +26,7 @@ const TopTracks = () => {
             activeRange={activeRange}
             setActiveRange={setActiveRange}
           />
-          <TrackList tracks={topTracks.items.slice(0, 10)} />
+          <TrackList tracks={topTracks.items} />
         </SectionWrapper>
       )}
     </main>

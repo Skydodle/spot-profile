@@ -12,7 +12,7 @@ const TopArtists = () => {
       const userTopArtists = await getTopArtists(`${activeRange}_term`);
       setTopArtists(userTopArtists.data);
 
-      console.log(userTopArtists.data);
+      // console.log(userTopArtists.data);
     };
 
     catchErrors(fetchData());
@@ -26,7 +26,7 @@ const TopArtists = () => {
             activeRange={activeRange}
             setActiveRange={setActiveRange}
           />
-          <ArtistsGrid artists={topArtists.items.slice(0, 10)} />
+          <ArtistsGrid artists={topArtists.items} />
         </SectionWrapper>
       )}
     </main>
