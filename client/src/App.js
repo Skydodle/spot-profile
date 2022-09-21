@@ -50,7 +50,7 @@ function App() {
     const fetchData = async () => {
       const { data } = await getCurrentUserProfile();
       setProfile(data);
-      console.log(data);
+      // console.log(data);
     };
 
     catchErrors(fetchData());
