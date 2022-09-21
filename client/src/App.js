@@ -8,7 +8,7 @@ import {
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
 import { GlobalStyle } from './styles';
-import { Login } from './pages';
+import { Login, Profile } from './pages';
 
 // Scroll to top of page when changing routes
 // https://reactrouter.com/web/guides/scroll-restoration/scroll-to-top
@@ -64,19 +64,7 @@ function App() {
                 <h1>Playlists</h1>
               </Route>
               <Route path="/">
-                <>
-                  <button onClick={logout}>Log Out</button>
-
-                  {profile && (
-                    <div>
-                      <h1>{profile.display_name}</h1>
-                      <p>{profile.followers.total} Followers</p>
-                      {profile.images.length && profile.images[0].url && (
-                        <img src={profile.images[0].url} alt="Avatar" />
-                      )}
-                    </div>
-                  )}
-                </>
+                <Profile />
               </Route>
             </Switch>
           </Router>
