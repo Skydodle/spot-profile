@@ -6,36 +6,10 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
+
 import { catchErrors } from './utils';
-import styled, { createGlobalStyle } from 'styled-components/macro';
-
-const GlobalStyle = createGlobalStyle`
-  :root {
-    --black: #121212;
-    --green: #1DB954;
-    --white: #ffffff;
-
-    --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  }
-
-  html {
-    box-sizing: border-box;
-  }
-
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--black);
-    color: var(--white);
-    font-family: var(--font);
-  }
-`;
+import { GlobalStyle } from './styles';
+import styled from 'styled-components/macro';
 
 const StyledLoginButton = styled.a`
   background-color: var(--green);
