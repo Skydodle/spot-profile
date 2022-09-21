@@ -6,19 +6,9 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
-
 import { catchErrors } from './utils';
 import { GlobalStyle } from './styles';
-import styled from 'styled-components/macro';
-
-const StyledLoginButton = styled.a`
-  background-color: var(--green);
-  color: var(--white);
-  padding: 10px 20px;
-  margin: 20px;
-  border-radius: 30px;
-  display: inline-block;
-`;
+import { Login } from './pages';
 
 // Scroll to top of page when changing routes
 // https://reactrouter.com/web/guides/scroll-restoration/scroll-to-top
@@ -56,12 +46,7 @@ function App() {
       <header className="App-header">
         {/** Conditional render based on login state*/}
         {!token ? (
-          <StyledLoginButton
-            className="App-link"
-            href="http://localhost:8888/login"
-          >
-            Log in to Spotify
-          </StyledLoginButton>
+          <Login />
         ) : (
           <Router>
             <ScrollToTop />
