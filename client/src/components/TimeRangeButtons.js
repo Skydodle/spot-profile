@@ -1,6 +1,8 @@
+import { StyledRangeButtons } from '../styles';
+
 const TimeRangeButtons = ({ activeRange, setActiveRange }) => {
   return (
-    <ul>
+    <StyledRangeButtons>
       <li>
         <button
           className={activeRange === 'short' ? 'active' : ''}
@@ -22,10 +24,10 @@ const TimeRangeButtons = ({ activeRange, setActiveRange }) => {
           className={activeRange === 'long' ? 'active' : ''}
           onClick={() => setActiveRange('long')}
         >
-          All time
+          All Time
         </button>
       </li>
-    </ul>
+    </StyledRangeButtons>
   );
 };
 
