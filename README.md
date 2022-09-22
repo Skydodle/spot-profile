@@ -1,6 +1,9 @@
 # Spot Profile App
 
 A web app for visualizing user specific Spotify profile data 
+
+<img src="https://media.giphy.com/media/pRc9EGK6WwI0nXaaf7/giphy.gif" width=80% height=auto>
+
 ## Technologies
 - [React](https://reactjs.org/)
 - [Node.js](nodejs.org)
