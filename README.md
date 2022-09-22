@@ -1,6 +1,7 @@
 # Spot Profile App
 
-A web app for visualizing user specific Spotify profile data 
+## Overview
+A web app for visualizing user specific Spotify profile data using the Spotify Web API, composed of 3 main sections: Top Artists, Top Tracks, Playlists, with the features of sorting by this month, 6 months, and all time. More features to come!
 
 <img src="https://media.giphy.com/media/pRc9EGK6WwI0nXaaf7/giphy.gif" width=80% height=auto>
 
