@@ -6,6 +6,9 @@ const StyledLoginContainer = styled.main`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  h1 {
+    font-size: 48px;
+  }
 `;
 
 const StyledLoginButton = styled.a`
@@ -16,6 +19,7 @@ const StyledLoginButton = styled.a`
   font-weight: 700;
   font-size: var(--fz-lg);
   padding: var(--spacing-sm) var(--spacing-xl);
+  margin: 20px 0 70px;
 
   &:hover,
   &:focus {
@@ -31,6 +35,7 @@ const LOGIN_URI =
 
 const Login = () => (
   <StyledLoginContainer>
+    <h1>Spot Profile</h1>
     <StyledLoginButton href={LOGIN_URI}>Log in to Spotify</StyledLoginButton>
   </StyledLoginContainer>
 );
