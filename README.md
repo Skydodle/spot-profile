@@ -12,7 +12,7 @@ More features to come!
 - [Node.js](nodejs.org)
 - [Express](http://expressjs.com/)
 - [Styled Components](https://styled-components.com/docs/)
-- [Spotify Web API] (https://developer.spotify.com/documentation/web-api/)
+- [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
 
 ## Local Installation & Set Up
 
