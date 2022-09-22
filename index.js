@@ -98,7 +98,7 @@ app.get('/callback', (req, res) => {
         // redirect to react app
         // pass along the token in query params
 
-        res.redirect(`http://${FRONTEND_URI}?${queryParams}`);
+        res.redirect(`${FRONTEND_URI}?${queryParams}`);
       } else {
         res.redirect(
           `/?${querystring.stringify({
