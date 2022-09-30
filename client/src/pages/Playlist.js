@@ -12,6 +12,8 @@ const Playlist = () => {
   const [tracks, setTracks] = useState(null);
   const [tracksData, setTracksData] = useState(null);
   const [audioFeatures, setAudioFeatures] = useState(null);
+  const [sortValue, setSortValue] = useState('');
+  const sortOptions = ['danceability', 'tempo', 'energy'];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +79,8 @@ const Playlist = () => {
     });
   }, [tracks, audioFeatures]);
 
+  console.log(tracksWithAudioFeatures);
+
   // // Create a memoized array of tracks for the nested track
   // const tracksForTracklist = useMemo(() => {
   //   if (!tracks) {
@@ -119,8 +123,26 @@ const Playlist = () => {
 
           <main>
             <SectionWrapper title="Playlist tracks" breadcrumb="true">
-              {playlist && tracksForTracklist ? (
-                <TrackList tracks={tracksForTracklist} />
+              <div>
+                <label className="sr-only" htmlFor="order-select">
+                  Sort tracks
+                </label>
+                <select
+                  name="track-order"
+                  id="order-select"
+                  onChange={(e) => setSortValue(e.target.value)}
+                >
+                  <option value="">Sort tracks</option>
+                  {sortOptions.map((option, i) => (
+                    <option value={option} key={i}>
+                      {`${option.charAt(0).toUpperCase()}${option.slice(1)}`}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {playlist && tracksWithAudioFeatures ? (
+                <TrackList tracks={tracksWithAudioFeatures} />
               ) : (
                 <Loader />
               )}
