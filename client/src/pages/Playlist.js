@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { catchErrors } from '../utils';
-import { getPlaylistById } from '../spotify';
+import { getPlaylistById, getAudioFeaturesForTracks } from '../spotify';
 import { StyledHeader } from '../styles';
 import { TrackList, SectionWrapper, Loader } from '../components';
 import axios from 'axios';
@@ -11,6 +11,7 @@ const Playlist = () => {
   const [playlist, setPlaylist] = useState(null);
   const [tracks, setTracks] = useState(null);
   const [tracksData, setTracksData] = useState(null);
+  const [audioFeatures, setAudioFeatures] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +24,7 @@ const Playlist = () => {
 
   // console.log(playlist);
 
+  // When tracksData updates, compile arrays of track and audioFeatures
   useEffect(() => {
     if (!tracksData) {
       return;
@@ -36,10 +38,19 @@ const Playlist = () => {
         setTracksData(data);
       }
     };
-
     setTracks((tracks) => [...(tracks ? tracks : []), ...tracksData.items]);
-
     catchErrors(fetchMoreData());
+
+    // Also update the audioFeatures state variable using the track IDs
+    const fetchAudioFeatures = async () => {
+      const ids = tracksData.items.map(({ track }) => track.id).join(',');
+      const { data } = await getAudioFeaturesForTracks(ids);
+      setAudioFeatures((audioFeatures) => [
+        ...(audioFeatures ? audioFeatures : []),
+        ...data['audio_features'],
+      ]);
+    };
+    catchErrors(fetchAudioFeatures());
   }, [tracksData]);
 
   // Create a memoized array of tracks for the nested track
