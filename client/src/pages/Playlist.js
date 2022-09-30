@@ -53,13 +53,37 @@ const Playlist = () => {
     catchErrors(fetchAudioFeatures());
   }, [tracksData]);
 
-  // Create a memoized array of tracks for the nested track
-  const tracksForTracklist = useMemo(() => {
-    if (!tracks) {
-      return;
+  // Map over tracks and add audio_features property to each track
+  const tracksWithAudioFeatures = useMemo(() => {
+    if (!tracks || !audioFeatures) {
+      return null;
     }
-    return tracks.map(({ track }) => track);
-  }, [tracks]);
+
+    return tracks.map(({ track }) => {
+      const trackToAdd = track;
+
+      if (!track.audio_features) {
+        const audioFeaturesObj = audioFeatures.find((item) => {
+          if (!item || !track) {
+            return null;
+          }
+          return item.id === track.id;
+        });
+
+        trackToAdd['audio_features'] = audioFeaturesObj;
+      }
+
+      return trackToAdd;
+    });
+  }, [tracks, audioFeatures]);
+
+  // // Create a memoized array of tracks for the nested track
+  // const tracksForTracklist = useMemo(() => {
+  //   if (!tracks) {
+  //     return;
+  //   }
+  //   return tracks.map(({ track }) => track);
+  // }, [tracks]);
 
   return (
     <>
