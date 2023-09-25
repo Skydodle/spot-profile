@@ -5,7 +5,7 @@ A web app for visualizing user specific Spotify profile data using the Spotify W
 
 More features to come!
 
-<img src="https://media.giphy.com/media/pRc9EGK6WwI0nXaaf7/giphy.gif" width=75% height=auto>
+<img src="https://media.giphy.com/media/pRc9EGK6WwI0nXaaf7/giphy.gif" width=100% height=auto>
 
 ## Technologies
 - [React](https://reactjs.org/)
